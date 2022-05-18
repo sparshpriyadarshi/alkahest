@@ -32,7 +32,7 @@ enable_sanitizers(project_options)
 
 # Add doxygen
 include(cmake/Doxygen.cmake)
-enable_doxygen(${source_dir})
+enable_doxygen(${include_dir})
 
 # Enable static analyzers
 include(cmake/StaticAnalysis.cmake)
