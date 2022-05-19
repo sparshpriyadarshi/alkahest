@@ -1,5 +1,5 @@
 function(enable_doxygen source_dir)
-    option(ENABLE_DOXYGEN "Enable Doxygen for source builds" ON)
+    option(ENABLE_DOXYGEN "Enable Doxygen for source builds" OFF)
     if(ENABLE_DOXYGEN)
         set(DOXYGEN_PROJECT_NAME "Alkahest Game Engine")
         set(DOXYGEN_GENERATE_HTML YES)

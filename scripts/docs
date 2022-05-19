@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cmake -DENABLE_DOXYGEN=ON -Bbuild -S.
+cmake --build build

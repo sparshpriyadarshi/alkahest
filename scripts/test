@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=ON -Bbuild -S.
+cmake --build build
+
+(cd build/alkahest && ctest)

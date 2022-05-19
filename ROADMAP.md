@@ -3,7 +3,7 @@
 * [X] Game definition
 * [X] Application entrypoint
 * [X] Documentation setup
-* [ ] Unit Testing
+* [X] Unit Testing
 * [X] Logging
 * [X] Assertions
 
