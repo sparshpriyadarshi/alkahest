@@ -1,0 +1,3 @@
+[submodule "alkahest/lib/fmt"]
+	path = alkahest/lib/fmt
+	url = https://github.com/fmtlib/fmt.git

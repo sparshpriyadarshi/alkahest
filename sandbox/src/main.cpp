@@ -2,15 +2,14 @@
 
 void Alkahest::Game::init()
 {
-    std::cout << "init()" << std::endl;
 }
 
 void Alkahest::Game::update()
 {
-    std::cout << "update()" << std::endl;
+    Alkahest::logInfo("In function: {}", "update()");
+    AKST_ASSERT(1 == 2);  // Should fail
 }
 
 void Alkahest::Game::cleanup()
 {
-    std::cout << "cleanup()" << std::endl;
 }

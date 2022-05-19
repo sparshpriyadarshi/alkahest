@@ -60,6 +60,16 @@ endif()
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
+# Set up third-party libraries
+set(LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib")
+set(FMT_DIR "${LIB_DIR}/fmt")
+
+# Set PIC for using fmt as a shared lib
+set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+
+# Add subdirectories for third-party libs
+add_subdirectory(${FMT_DIR})
+
 # Add executable to build
 add_library(alkahest)
 target_sources(alkahest PRIVATE ${source_files})
@@ -76,3 +86,7 @@ PROPERTIES
 # Add API flags
 include(cmake/APIExportFlags.cmake)
 set_api_flags(alkahest)
+
+# Link fmt
+target_link_libraries(alkahest PUBLIC "fmt")
+target_include_directories(alkahest PUBLIC "${FMT_DIR}/include")
