@@ -17,17 +17,8 @@ namespace Alkahest
     class API Game
     {
     public:
-        Game()
-        {
-            sysInit();
-            init();
-        }
-
-        ~Game()
-        {
-            cleanup();
-            sysCleanup();
-        };
+        Game() {};
+        ~Game() {};
     public:
         /** The initialization function for the client application.
          *
@@ -52,9 +43,21 @@ namespace Alkahest
          */
         void cleanup();
     private:
-        void sysInit() {};
+        void sysInit()
+        {
+            // Initialize engine subsystems
+
+            // Call application init()
+            init();
+        };
         void sysUpdate() {};
-        void sysCleanup() {};
+        void sysCleanup()
+        {
+            // Call application cleanup()
+            cleanup();
+
+            // Clean up engine subsystems
+        };
     public:
         /** The engine run loop */
         void run()
@@ -78,6 +81,8 @@ namespace Alkahest
 int main(int argc, char** argv)
 {
     Alkahest::Game& game = Alkahest::CreateGame();
+    game.sysInit();
     game.run();
+    game.sysCleanup();
     return 0;
 }
