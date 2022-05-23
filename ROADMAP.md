@@ -12,4 +12,5 @@ Alkahest engine, listed in no particular order.
 * [ ] Memory Management
 * [ ] Job System + Thread/Fiber/Coroutine/Worker Pools
 * [ ] Subsystem Initialization
+* [ ] CI/CD Pipeline
 
