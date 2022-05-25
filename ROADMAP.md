@@ -9,8 +9,9 @@ Alkahest engine, listed in no particular order.
 * [X] Unit Testing
 * [X] Logging
 * [X] Assertions
+* [X] Platform Independence Layer
+* [ ] Subsystem Initialization
 * [ ] Memory Management
 * [ ] Job System + Thread/Fiber/Coroutine/Worker Pools
-* [ ] Subsystem Initialization
 * [ ] CI/CD Pipeline
 

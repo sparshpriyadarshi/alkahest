@@ -4,12 +4,17 @@ cmake_minimum_required(VERSION 3.12.4)
 project(alkahest VERSION 0.0.0.1)
 include(cmake/DefaultProjectSettings.cmake)
 
+# Set platform variables for path resolution
+include(cmake/PlatformDetection.cmake)
+set_platform_detection_vars()
+
 # Create variable for source files
 set(source_dir "${PROJECT_SOURCE_DIR}/src/")
 file(
     GLOB
     source_files
     "${source_dir}/main.cpp"
+    "${source_dir}/platform/${target_platform}/sample.cpp"
 )
 
 # Set include dir for self-reference

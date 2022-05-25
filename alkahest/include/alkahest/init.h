@@ -42,7 +42,7 @@ namespace Alkahest
          * the game life.
          */
         void cleanup();
-    private:
+    public:
         void sysInit()
         {
             // Initialize engine subsystems
@@ -77,9 +77,13 @@ namespace Alkahest
     };
 }
 
+// Sample platform-specific function
+extern std::string platform;
+
 /** The entrypoint for the application */
 int main(int argc, char** argv)
 {
+    Alkahest::logInfo("Platform: {}", platform);
     Alkahest::Game& game = Alkahest::CreateGame();
     game.sysInit();
     game.run();
