@@ -1,9 +1,16 @@
 #pragma once
 
 #include "macros.h"
+#include "systems/window.h"
 
 namespace Alkahest
 {
+    namespace
+    {
+        // Static engine subsystems
+        static WindowSystem s_windowSystem;
+    }
+
     /**
      * Used as the application entrypoint. When creating an application
      * using Alkahest, the developer should define three functions:
@@ -46,17 +53,23 @@ namespace Alkahest
         void sysInit()
         {
             // Initialize engine subsystems
+            s_windowSystem.init();
+            s_windowSystem.createWindow();
 
             // Call application init()
             init();
         };
-        void sysUpdate() {};
+        void sysUpdate()
+        {
+            s_windowSystem.update();
+        };
         void sysCleanup()
         {
             // Call application cleanup()
             cleanup();
 
             // Clean up engine subsystems
+            s_windowSystem.cleanup();
         };
     public:
         /** The engine run loop */

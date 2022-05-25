@@ -13,8 +13,9 @@ set(source_dir "${PROJECT_SOURCE_DIR}/src/")
 file(
     GLOB
     source_files
-    "${source_dir}/main.cpp"
+    "${source_dir}/log.cpp"
     "${source_dir}/platform/${target_platform}/sample.cpp"
+    "${source_dir}/platform/${target_platform}/systems/window.cpp"
 )
 
 # Set include dir for self-reference
@@ -58,17 +59,42 @@ endif()
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
+# TODO: Refactor for Platform Independence
+# Check for OpenGL
+find_package(OpenGL)
+
+if (OPENGL_FOUND)
+    message("OpenGL found!")
+    include_directories(${OPENGL_INCLUDE_DIR})
+else(OPENGL_FOUND)
+    message("OpenGL not found!")
+endif(OPENGL_FOUND)
+
 # Set up third-party libraries
 set(LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 set(FMT_DIR "${LIB_DIR}/fmt")
-set(GTEST_DIR "${LIB_DIR}/googletest")
+set(GLFW_DIR "${LIB_DIR}/glfw")
+set(GL3W_DIR "${LIB_DIR}/gl3w")
+
+# Disable unwanted GLFW features
+set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "Build the GLFW example programs")
+set(GLFW_BUILD_TESTS OFF CACHE INTERNAL "Build the GLFW test programs")
+set(GLFW_BUILD_DOCS OFF CACHE INTERNAL "Build the GLFW documentation")
+set(GLFW_INSTALL OFF CACHE INTERNAL "Generate installation target")
+
+# Set GL_PREFERENCE
+set(OpenGL_GL_PREFERENCE GLVND)
+
+# Generate OpenGL profile in build dir
+execute_process(COMMAND python3 gl3w_gen.py --root ${PROJECT_BINARY_DIR}/lib/gl3w WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/lib/gl3w)
 
 # Set PIC for using fmt as a shared lib
 set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
 # Add subdirectories for third-party libs
 add_subdirectory(${FMT_DIR})
-#add_subdirectory(${GTEST_DIR})
+add_subdirectory(${GLFW_DIR})
+add_subdirectory(${GL3W_DIR})
 
 # Testing setup
 if(ENABLE_TESTING)
@@ -121,3 +147,12 @@ set_api_flags(alkahest)
 # Link fmt
 target_link_libraries(alkahest PUBLIC "fmt")
 target_include_directories(alkahest PUBLIC "${FMT_DIR}/include")
+
+# Link GLFW
+target_link_libraries(alkahest PRIVATE "glfw")
+target_include_directories(alkahest PRIVATE "${GLFW_DIR}/include")
+target_compile_definitions(alkahest PRIVATE "GLFW_INCLUDE_NONE")
+
+# Link gl3w
+target_link_libraries(alkahest PRIVATE "gl3w")
+target_include_directories(alkahest PRIVATE "${GL3W_DIR}/include")

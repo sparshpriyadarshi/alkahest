@@ -23,21 +23,23 @@ namespace Alkahest
 #define AKST_DEBUG_BREAK() asm("int $3")
 
 #ifdef DEBUG
-#define AKST_ENG_ASSERT(expr) \
+#define AKST_ENG_ASSERT(expr, msg) \
     if (expr) {} \
     else \
     { \
+        logError(msg); \
         logError("Engine assertion failed! Expression: {} at {}:{}", #expr, __FILE__, __LINE__); \
         AKST_DEBUG_BREAK(); \
     }
 #else
-#define AKST_ENG_ASSERT(expr)
+#define AKST_ENG_ASSERT(expr, msg)
 #endif
 
-#define AKST_ASSERT(expr) \
+#define AKST_ASSERT(expr, msg) \
     if (expr) {} \
     else \
     { \
+        logError(msg); \
         logError("Assertion failed! Expression: {} at {}:{}", #expr, __FILE__, __LINE__); \
         AKST_DEBUG_BREAK(); \
     }
