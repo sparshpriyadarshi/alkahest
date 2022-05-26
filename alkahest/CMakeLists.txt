@@ -16,6 +16,7 @@ file(
     "${source_dir}/log.cpp"
     "${source_dir}/platform/${target_platform}/sample.cpp"
     "${source_dir}/platform/${target_platform}/systems/window.cpp"
+    "${source_dir}/util/allocator.cpp"
 )
 
 # Set include dir for self-reference
