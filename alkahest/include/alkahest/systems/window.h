@@ -28,6 +28,7 @@ namespace Alkahest
         inline unsigned int getHeight() const { return m_height; };
         void setVSync(bool vsync);
         bool isVSync() const;
+        inline void *getWindowPointer() const { return m_window; };
     private:
         struct WindowData
         {

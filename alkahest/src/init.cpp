@@ -1,4 +1,6 @@
 #include <alkahest/init.h>
+#include <alkahest/systems/window.h>
+#include <alkahest/systems/input.h>
 
 namespace Alkahest
 {
@@ -6,6 +8,7 @@ namespace Alkahest
     {
         // Static engine subsystems
         static WindowSystem s_windowSystem;
+        static InputSystem s_inputSystem;
     }
 
     void Game::sysInit()
@@ -13,6 +16,9 @@ namespace Alkahest
         // Initialize engine subsystems
         s_windowSystem.init();
         s_windowSystem.createWindow();
+
+        s_inputSystem.init();
+        s_inputSystem.setWindowPointer(s_windowSystem.getWindowPointer());
 
         // Call application init()
         init();

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "macros.h"
-#include "systems/window.h"
 
 namespace Alkahest
 {

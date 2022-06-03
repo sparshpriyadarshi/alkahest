@@ -7,3 +7,6 @@
 [submodule "alkahest/lib/gl3w"]
 	path = alkahest/lib/gl3w
 	url = https://github.com/skaslev/gl3w.git
+[submodule "alkahest/lib/glm"]
+	path = alkahest/lib/glm
+	url = https://github.com/g-truc/glm.git

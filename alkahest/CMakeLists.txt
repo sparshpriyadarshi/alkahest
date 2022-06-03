@@ -17,7 +17,9 @@ file(
     "${source_dir}/log.cpp"
     "${source_dir}/platform/${target_platform}/sample.cpp"
     "${source_dir}/platform/${target_platform}/systems/window.cpp"
+    "${source_dir}/platform/${target_platform}/systems/input.cpp"
     "${source_dir}/util/allocator.cpp"
+    "${source_dir}/util/input.cpp"
 )
 
 # Set include dir for self-reference
@@ -77,6 +79,7 @@ set(LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 set(FMT_DIR "${LIB_DIR}/fmt")
 set(GLFW_DIR "${LIB_DIR}/glfw")
 set(GL3W_DIR "${LIB_DIR}/gl3w")
+set(GLM_DIR "${LIB_DIR}/glm")
 
 # Disable unwanted GLFW features
 set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "Build the GLFW example programs")
@@ -97,6 +100,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 add_subdirectory(${FMT_DIR})
 add_subdirectory(${GLFW_DIR})
 add_subdirectory(${GL3W_DIR})
+add_subdirectory(${GLM_DIR})
 
 # Testing setup
 if(ENABLE_TESTING)
@@ -158,3 +162,7 @@ target_compile_definitions(alkahest PRIVATE "GLFW_INCLUDE_NONE")
 # Link gl3w
 target_link_libraries(alkahest PRIVATE "gl3w")
 target_include_directories(alkahest PRIVATE "${GL3W_DIR}/include")
+
+# Link GLM
+target_link_libraries(alkahest PUBLIC "glm")
+target_include_directories(alkahest PUBLIC "${GLM_DIR}/include")
