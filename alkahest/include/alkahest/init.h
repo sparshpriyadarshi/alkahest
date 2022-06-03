@@ -49,6 +49,8 @@ namespace Alkahest
     public:
         /** The engine run loop */
         void run();
+    public:
+        static void stop();
     };
 }
 

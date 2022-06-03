@@ -6,9 +6,16 @@ namespace Alkahest
 {
     namespace
     {
+        static bool s_shouldStop = false;
+
         // Static engine subsystems
         static WindowSystem s_windowSystem;
         InputSystem& s_inputSystem = InputSystem::getInstance();
+    }
+
+    void Game::stop()
+    {
+        s_shouldStop = true;
     }
 
     void Game::sysInit()
@@ -20,7 +27,9 @@ namespace Alkahest
         s_windowSystem.init();
         logTrace("Creating window...");
         s_windowSystem.createWindow();
-
+        logTrace("Setting window close callback...");
+        s_windowSystem.setWindowCloseCallback(Game::stop);
+        
         // Input System
         logTrace("Initializing Input System...");
         s_inputSystem.init();
@@ -47,7 +56,7 @@ namespace Alkahest
 
     void Game::run()
     {
-        while(true)
+        while(!s_shouldStop)
         {
             sysUpdate();
             update();

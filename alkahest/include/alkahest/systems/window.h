@@ -29,6 +29,7 @@ namespace Alkahest
         void setVSync(bool vsync);
         bool isVSync() const;
         inline void *getWindowPointer() const { return m_window; };
+        void setWindowCloseCallback(std::function<void()> callback);
     private:
         struct WindowData
         {
@@ -36,6 +37,7 @@ namespace Alkahest
             unsigned int width;
             unsigned int height;
             bool vsync;
+            std::function<void()> closeCallback;
         };
         WindowData m_data;
         void *m_window;

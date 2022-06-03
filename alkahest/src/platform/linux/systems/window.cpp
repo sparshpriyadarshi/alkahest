@@ -105,4 +105,16 @@ namespace Alkahest
     {
         return m_data.vsync;
     }
+
+    void WindowSystem::setWindowCloseCallback(std::function<void()> callback)
+    {
+        m_data.closeCallback = callback;
+
+        glfwSetWindowCloseCallback(static_cast<GLFWwindow*>(m_window), \
+            [](GLFWwindow *window)
+            {
+                WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+                data.closeCallback();
+            });
+    }
 }
