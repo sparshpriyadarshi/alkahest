@@ -44,10 +44,36 @@ namespace Alkahest
         void setMousePos(double x, double y, bool propagate = false);
         void setMouseScroll(double x, double y);
     public:
+        static InputSystem& getInstance();
         void setWindowPointer(void *window);
     private:
         std::unordered_map<Key, KeyState> m_keys;
         std::unordered_map<MouseButton, ButtonState> m_mouseButtons;
         double m_mouseX, m_mouseY, m_scrollX, m_scrollY;
+    };
+
+    class API Input
+    {
+    public:
+        static bool isKeyDown(Key keycode);
+        static bool isKeyUp(Key keycode);
+        static bool isKeyHeld(Key keycode);
+
+        static bool isMouseButtonDown(MouseButton button);
+        static bool isMouseButtonUp(MouseButton button);
+        static bool isMouseButtonHeld(MouseButton button);
+
+        static glm::vec2 getMousePos();
+        static glm::vec2 getMouseScroll();
+
+        static float getAxis(Axis axis);
+    public:
+        static void setKeyState(Key keycode, KeyState state);
+        static void setMouseButtonState(MouseButton button, ButtonState state);
+        static void setMousePos(double x, double y, bool propagate = false);
+        static void setMouseScroll(double x, double y);
+    private:
+        Input() = delete;
+        ~Input() = delete;
     };
 }

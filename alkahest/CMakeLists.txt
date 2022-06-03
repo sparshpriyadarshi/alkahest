@@ -138,6 +138,7 @@ add_library(alkahest)
 target_sources(alkahest PRIVATE ${source_files})
 target_link_libraries(alkahest PRIVATE project_options project_warnings Threads::Threads)
 target_include_directories(alkahest PRIVATE ${include_dir})
+target_compile_definitions(alkahest PRIVATE ${target_platform_include_macro} LOGGING_LEVEL_ALL)
 
 # Library versioning
 set_target_properties(alkahest
@@ -155,9 +156,9 @@ target_link_libraries(alkahest PUBLIC "fmt")
 target_include_directories(alkahest PUBLIC "${FMT_DIR}/include")
 
 # Link GLFW
-target_link_libraries(alkahest PRIVATE "glfw")
-target_include_directories(alkahest PRIVATE "${GLFW_DIR}/include")
-target_compile_definitions(alkahest PRIVATE "GLFW_INCLUDE_NONE")
+target_link_libraries(alkahest PUBLIC "glfw")
+target_include_directories(alkahest PUBLIC "${GLFW_DIR}/include")
+target_compile_definitions(alkahest PUBLIC "GLFW_INCLUDE_NONE")
 
 # Link gl3w
 target_link_libraries(alkahest PRIVATE "gl3w")

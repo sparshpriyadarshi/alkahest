@@ -8,16 +8,23 @@ namespace Alkahest
     {
         // Static engine subsystems
         static WindowSystem s_windowSystem;
-        static InputSystem s_inputSystem;
+        InputSystem& s_inputSystem = InputSystem::getInstance();
     }
 
     void Game::sysInit()
     {
         // Initialize engine subsystems
+
+        // Window System
+        logTrace("Initializing Window System...");
         s_windowSystem.init();
+        logTrace("Creating window...");
         s_windowSystem.createWindow();
 
+        // Input System
+        logTrace("Initializing Input System...");
         s_inputSystem.init();
+        logTrace("Setting window pointer for Input System...");
         s_inputSystem.setWindowPointer(s_windowSystem.getWindowPointer());
 
         // Call application init()
