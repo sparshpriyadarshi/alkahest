@@ -10,53 +10,53 @@
 
 namespace Alkahest
 {
-    enum class log_level : std::uint8_t
-    {
-        TRACE = 0,
-        DEBUG = 1,
-        INFO  = 2,
-        WARN  = 3,
-        ERROR = 4
-    };
-
-    struct enum_hasher
-    {
-        template<typename T> std::size_t operator()(T t) const { return static_cast<std::size_t>(t); };
-    };
-
-    const std::unordered_map<log_level, std::string, enum_hasher> uncoloredText
-    {
-        { log_level::TRACE, " [TRACE] "   },
-        { log_level::DEBUG, " [DEBUG] "   },
-        { log_level::INFO , " [INFO] "    },
-        { log_level::WARN , " [WARNING] " },
-        { log_level::ERROR, " [ERROR] "   }
-    };
-
-    const std::unordered_map<log_level, std::string, enum_hasher> coloredText
-    {
-        { log_level::TRACE, " \x1b[37;1m[TRACE]\x1b[0m "   },
-        { log_level::DEBUG, " \x1b[34;1m[DEBUG]\x1b[0m "   },
-        { log_level::INFO , " \x1b[32;1m[INFO]\x1b[0m "    },
-        { log_level::WARN , " \x1b[33;1m[WARNING]\x1b[0m " },
-        { log_level::ERROR, " \x1b[31;1m[ERROR]\x1b[0m "   }        
-    };
-
-    #if defined(LOGGING_LEVEL_ALL) || defined(LOGGING_LEVEL_TRACE)
-        constexpr log_level LOG_LEVEL_CUTOFF = log_level::TRACE;
-    #elif defined(LOGGING_LEVEL_DEBUG)
-        constexpr log_level LOG_LEVEL_CUTOFF = log_level::DEBUG;
-    #elif defined(LOGGING_LEVEL_WARN)
-        constexpr log_level LOG_LEVEL_CUTOFF = log_level::WARN;
-    #elif defined(LOGGING_LEVEL_ERROR)
-        constexpr log_level LOG_LEVEL_CUTOFF = log_level::ERROR;
-    #elif defined(LOGGING_LEVEL_NONE)
-        constexpr log_level LOG_LEVEL_CUTOFF = log_level::ERROR + 1;
-    #else
-        constexpr log_level LOG_LEVEL_CUTOFF = log_level::INFO;
-    #endif
-
     namespace {
+        enum class log_level : std::uint8_t
+        {
+            TRACE = 0,
+            DEBUG = 1,
+            INFO  = 2,
+            WARN  = 3,
+            ERROR = 4
+        };
+
+        struct enum_hasher
+        {
+            template<typename T> std::size_t operator()(T t) const { return static_cast<std::size_t>(t); };
+        };
+
+        const std::unordered_map<log_level, std::string, enum_hasher> uncoloredText
+        {
+            { log_level::TRACE, " [TRACE] "   },
+            { log_level::DEBUG, " [DEBUG] "   },
+            { log_level::INFO , " [INFO] "    },
+            { log_level::WARN , " [WARNING] " },
+            { log_level::ERROR, " [ERROR] "   }
+        };
+
+        const std::unordered_map<log_level, std::string, enum_hasher> coloredText
+        {
+            { log_level::TRACE, " \x1b[37;1m[TRACE]\x1b[0m "   },
+            { log_level::DEBUG, " \x1b[34;1m[DEBUG]\x1b[0m "   },
+            { log_level::INFO , " \x1b[32;1m[INFO]\x1b[0m "    },
+            { log_level::WARN , " \x1b[33;1m[WARNING]\x1b[0m " },
+            { log_level::ERROR, " \x1b[31;1m[ERROR]\x1b[0m "   }        
+        };
+
+        #if defined(LOGGING_LEVEL_ALL) || defined(LOGGING_LEVEL_TRACE)
+            constexpr log_level LOG_LEVEL_CUTOFF = log_level::TRACE;
+        #elif defined(LOGGING_LEVEL_DEBUG)
+            constexpr log_level LOG_LEVEL_CUTOFF = log_level::DEBUG;
+        #elif defined(LOGGING_LEVEL_WARN)
+            constexpr log_level LOG_LEVEL_CUTOFF = log_level::WARN;
+        #elif defined(LOGGING_LEVEL_ERROR)
+            constexpr log_level LOG_LEVEL_CUTOFF = log_level::ERROR;
+        #elif defined(LOGGING_LEVEL_NONE)
+            constexpr log_level LOG_LEVEL_CUTOFF = log_level::ERROR + 1;
+        #else
+            constexpr log_level LOG_LEVEL_CUTOFF = log_level::INFO;
+        #endif
+
         std::string timestamp()
         {
             std::chrono::system_clock::time_point tp = std::chrono::system_clock::now();

@@ -13,6 +13,7 @@ set(source_dir "${PROJECT_SOURCE_DIR}/src/")
 file(
     GLOB
     source_files
+    "${source_dir}/init.cpp"
     "${source_dir}/log.cpp"
     "${source_dir}/platform/${target_platform}/sample.cpp"
     "${source_dir}/platform/${target_platform}/systems/window.cpp"

@@ -7,13 +7,13 @@ namespace Alkahest
     {
         AKST_ENG_ASSERT(size > 0, "Allocated size must be greater than zero!");
 
-        m_stack = malloc(size);
+        m_stack = std::malloc(size);
         m_topMarker = 0;
     }
 
     StackAllocator::~StackAllocator()
     {
-        free(m_stack);
+        std::free(m_stack);
     }
 
     void StackAllocator::clear()
