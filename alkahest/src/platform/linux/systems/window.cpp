@@ -12,7 +12,7 @@ namespace Alkahest
         logError("GLFW Error (Code {}): {}", e, msg);
     }
 
-    void WindowSystem::init()
+    void WindowSystem::init(const WindowProps& props)
     {
         if (!s_glfwInit)
         {
@@ -33,26 +33,6 @@ namespace Alkahest
 
             glfwSetErrorCallback(handleGLFWError);
             s_glfwInit = true;
-        }
-    }
-
-    void WindowSystem::cleanup()
-    {
-        glfwDestroyWindow(reinterpret_cast<GLFWwindow*>(m_window));
-        glfwTerminate();
-    }
-
-    void WindowSystem::update()
-    {
-        glfwSwapBuffers(reinterpret_cast<GLFWwindow*>(m_window));
-        glfwPollEvents();
-    }
-
-    bool WindowSystem::createWindow(const WindowProps& props)
-    {
-        if (!s_glfwInit)
-        {
-            return false;
         }
 
         m_data.title = props.title;
@@ -84,8 +64,18 @@ namespace Alkahest
             data.width = width;
             data.height = height;
         });
+    }
 
-        return true;
+    void WindowSystem::cleanup()
+    {
+        glfwDestroyWindow(reinterpret_cast<GLFWwindow*>(m_window));
+        glfwTerminate();
+    }
+
+    void WindowSystem::update()
+    {
+        glfwSwapBuffers(reinterpret_cast<GLFWwindow*>(m_window));
+        glfwPollEvents();
     }
 
     void WindowSystem::setVSync(bool vsync)

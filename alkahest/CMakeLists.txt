@@ -93,7 +93,6 @@ if(UNIX)
         COMMAND /bin/sh -c "loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type"
         OUTPUT_VARIABLE result_display_server
     )
-    message("Session ${result_display_server}")
     if("${result_display_server}" MATCHES "wayland")
         message("Wayland session detected!")
         set(GLFW_USE_WAYLAND ON CACHE INTERNAL "Build GLFW for Wayland")

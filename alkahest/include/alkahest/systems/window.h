@@ -1,17 +1,14 @@
 #pragma once
 
-#include "_base.h"
+#include "../macros.h"
 
 namespace Alkahest
 {
-    class NOT_EXPORTED WindowSystem : public ISubsystem
+    class NOT_EXPORTED WindowSystem
     {
     public:
         WindowSystem() {};
         virtual ~WindowSystem() {};
-    public:
-        virtual void init() override;
-        virtual void cleanup() override;
     public:
         struct WindowProps
         {
@@ -22,7 +19,8 @@ namespace Alkahest
             WindowProps(std::string t = "Alkahest Game", unsigned int w = 1280,\
                 unsigned int h = 768): title(t), width(w), height(h) {};
         };
-        bool createWindow(const WindowProps& props = WindowProps());
+        void init(const WindowProps& props = WindowProps());
+        void cleanup();
         void update();
         inline unsigned int getWidth() const { return m_width; };
         inline unsigned int getHeight() const { return m_height; };

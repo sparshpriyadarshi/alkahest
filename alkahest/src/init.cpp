@@ -25,16 +25,12 @@ namespace Alkahest
         // Window System
         logTrace("Initializing Window System...");
         s_windowSystem.init();
-        logTrace("Creating window...");
-        s_windowSystem.createWindow();
         logTrace("Setting window close callback...");
         s_windowSystem.setWindowCloseCallback(Game::stop);
         
         // Input System
         logTrace("Initializing Input System...");
-        s_inputSystem.init();
-        logTrace("Setting window pointer for Input System...");
-        s_inputSystem.setWindowPointer(s_windowSystem.getWindowPointer());
+        s_inputSystem.init(s_windowSystem.getWindowPointer());
 
         // Call application init()
         init();

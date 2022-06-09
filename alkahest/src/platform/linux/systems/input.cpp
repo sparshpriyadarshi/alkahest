@@ -15,8 +15,21 @@ namespace Alkahest
         }
     }
 
-    void InputSystem::setWindowPointer(void *window)
+    InputSystem& InputSystem::getInstance()
     {
+        static InputSystem i;
+        return i;
+    }
+
+    void InputSystem::init(void *window)
+    {
+        m_mouseX = 0.0;
+        m_mouseY = 0.0;
+        m_scrollX = 0.0;
+        m_scrollY = 0.0;
+
+        s_init = true;
+
         s_window = window;
 
         glfwSetKeyCallback(static_cast<GLFWwindow*>(s_window), \
@@ -44,22 +57,6 @@ namespace Alkahest
             {
                 Input::setMouseScroll(x, y);
             });
-    }
-
-    InputSystem& InputSystem::getInstance()
-    {
-        static InputSystem i;
-        return i;
-    }
-
-    void InputSystem::init()
-    {
-        m_mouseX = 0.0;
-        m_mouseY = 0.0;
-        m_scrollX = 0.0;
-        m_scrollY = 0.0;
-
-        s_init = true;
     }
 
     void InputSystem::cleanup()

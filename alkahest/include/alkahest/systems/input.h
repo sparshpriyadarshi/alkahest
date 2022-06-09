@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../macros.h"
-#include "_base.h"
 
 #include <glm/glm.hpp>
 
@@ -15,14 +14,14 @@ namespace Alkahest
     enum MouseButton : uint8_t;
     enum Key : int16_t;
 
-    class NOT_EXPORTED InputSystem : public ISubsystem
+    class NOT_EXPORTED InputSystem
     {
     public:
         InputSystem() {};
         virtual ~InputSystem() {};
     public:
-        virtual void init() override;
-        virtual void cleanup() override;
+        void init(void *window);
+        void cleanup();
     public:
         bool isKeyDown(Key keycode);
         bool isKeyUp(Key keycode);
@@ -45,7 +44,6 @@ namespace Alkahest
         void setMouseScroll(double x, double y);
     public:
         static InputSystem& getInstance();
-        void setWindowPointer(void *window);
     private:
         std::unordered_map<Key, KeyState> m_keys;
         std::unordered_map<MouseButton, ButtonState> m_mouseButtons;
