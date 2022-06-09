@@ -87,6 +87,19 @@ set(GLFW_BUILD_TESTS OFF CACHE INTERNAL "Build the GLFW test programs")
 set(GLFW_BUILD_DOCS OFF CACHE INTERNAL "Build the GLFW documentation")
 set(GLFW_INSTALL OFF CACHE INTERNAL "Generate installation target")
 
+# Check for X11/Wayland (*nix only)
+if(UNIX)
+    execute_process(
+        COMMAND /bin/sh -c "loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type"
+        OUTPUT_VARIABLE result_display_server
+    )
+    message("Session ${result_display_server}")
+    if("${result_display_server}" MATCHES "wayland")
+        message("Wayland session detected!")
+        set(GLFW_USE_WAYLAND ON CACHE INTERNAL "Build GLFW for Wayland")
+    endif()
+endif()
+
 # Set GL_PREFERENCE
 set(OpenGL_GL_PREFERENCE GLVND)
 
