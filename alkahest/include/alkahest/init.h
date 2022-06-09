@@ -53,4 +53,3 @@ namespace Alkahest
         static void stop();
     };
 }
-

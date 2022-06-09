@@ -7,6 +7,33 @@ namespace Alkahest
     // Markers represent a point within memory
     typedef std::uint32_t Marker;
 
+    namespace Memory
+    {
+        struct chunk
+        {
+            void *start;
+            std::uint32_t size;
+            void *end;
+        };
+    }
+
+    class API HeapAllocator
+    {
+    public:
+        HeapAllocator(std::uint32_t size);
+        ~HeapAllocator();
+    public:
+        void *alloc(std::uint32_t size);
+        void free(void *obj);
+    private:
+        inline std::size_t align(std::uint32_t n) { return (n + sizeof(size_t) - 1) & ~(sizeof(std::size_t) - 1); };
+        void *findAvailableSlot(std::uint32_t size);
+    private:
+        void *m_heap;
+        std::uint32_t m_size;
+        std::map<void*,Memory::chunk> m_allocations;
+    };
+
     /**
      * Used to allocate chunks of memory.
      */

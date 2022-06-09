@@ -19,7 +19,6 @@ file(
     "${source_dir}/platform/${target_platform}/systems/window.cpp"
     "${source_dir}/platform/${target_platform}/systems/input.cpp"
     "${source_dir}/util/allocator.cpp"
-    "${source_dir}/util/input.cpp"
 )
 
 # Set include dir for self-reference

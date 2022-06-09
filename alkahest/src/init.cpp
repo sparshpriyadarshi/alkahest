@@ -1,6 +1,9 @@
 #include <alkahest/init.h>
 #include <alkahest/systems/window.h>
 #include <alkahest/systems/input.h>
+#include <alkahest/util/allocator.h>
+
+Alkahest::HeapAllocator g_PrimaryHeapAllocator(1024);
 
 namespace Alkahest
 {
